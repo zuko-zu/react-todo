@@ -1,0 +1,36 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto' ,-apple-system, system-ui, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo {  
+  width: 750px;
+  height: 530px;
+  border: 1px solid #f1f1f1;
+  border-radius: 10px;
+
+  box-shadow: 1px 2px 20px #f3f3f3;
+
+  &__sidebar {
+    width: 200px;
+    height: 100%;
+    border-right: 1px solid #f1f1f1;
+    padding: 60px 20px;
+
+    background-color: #f4f6f8;
+  }
+}
