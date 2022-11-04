@@ -34,3 +34,34 @@ body {
     background-color: #f4f6f8;
   }
 }
+
+.field {
+  background-color: #ffffff;
+  border: 1px solid #efefef;
+  border-radius: 4px;
+  padding: 8px 12px;
+  width: 100%;
+
+  &:focus {
+    border-color: #dbdbdb;
+    outline: none;
+  }
+}
+
+.button {
+  background-color: #4dd599;
+  border-radius: 4px;
+  color: #ffffff;
+  border: 0;
+  padding: 10px 20px;
+  margin-top: 15px;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: darken(#4dd599, 6%)
+  }
+
+  &:active {
+    background-color: darken(#4dd599, 10%)
+  }
+}
