@@ -1,45 +1,69 @@
 .list {
-    list-style: none;
-    margin: 0;
-    margin-bottom: 30px;
-    padding: 0;
+  $self: &;
 
-    &__item {
-        display: flex;
-        align-items: center;
+  list-style: none;
+  margin: 0;
+  margin-bottom: 30px;
+  padding: 0;
 
-        margin-bottom: 5px;
-        padding: 10px 12px;
+  &__item {
+    display: flex;
+    align-items: center;
 
-        cursor: pointer;
+    margin-bottom: 5px;
+    padding: 10px 12px;
 
-        &--active {
-            border-radius: 4px;
+    cursor: pointer;
 
-            background: #ffffff;
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.04);
-        }
+    &--active {
+      border-radius: 4px;
 
-        .badge {
-            position: relative;
-            left: -4px;
-            margin-left: 8px;
-        }
+      background: #ffffff;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.04);
     }
 
-    &__icon {
-        margin-right: 8px;
-        display: flex;
-        align-items: center;
-        img {
-            opacity: 0.6;
-        }
+    &:hover #{$self}__remove-icon {
+      opacity: 0.2;
     }
+
+    #{$self}__remove-icon {
+      opacity: 0;
+      
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .badge {
+      position: relative;
+      left: -4px;
+      margin-left: 8px;
+    }
+
+    span {
+      flex: 1;
+    }
+  }
+
+  &__icon {
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    
+    img {
+        opacity: 0.6;
+    }
+  }
 }
 
 .list__add-button span {
-    color: #767676;
-    &:hover {
-        color: #000000;
-    }
+  color: #767676;
+
+  &:hover {
+    color: #000000;
+  }
 }

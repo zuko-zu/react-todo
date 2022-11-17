@@ -5,11 +5,6 @@ import List from './components/List/List'
 
 import DB from './assets/db.json'
 
-
-// import listSvg from './assets/icons/list.svg'
-// import addListSvg from './assets/icons/add.svg'
-
-
 function App() {
   const [lists, setLists] = useState(DB.lists.map(item => {
     item.color = DB.colors.filter(color => color.id === item.colorId)[0].name
@@ -18,6 +13,11 @@ function App() {
 
   const onAddList = (obj) => {
     const newList = [...lists, obj]
+    setLists(newList)
+  }
+
+  const onRemove = item => {
+    const newList = lists.filter(list => list.name !== item.name)
     setLists(newList)
   }
 
@@ -41,6 +41,7 @@ function App() {
         ]} />
         <List 
         items={lists} 
+        onRemove={onRemove}
         isRemovable 
         />
         <AddList 
