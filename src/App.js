@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import AddList from './components/AddList/AddList'
 import List from './components/List/List'
+import Tasks from './components/Tasks/Tasks'
 
 import DB from './assets/db.json'
 
@@ -49,7 +50,7 @@ function App() {
         onAdd={onAddList} />
       </div>
       <div className="todo__tasks">
-
+        <Tasks />
       </div>
     </div>
   )
