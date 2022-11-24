@@ -32,9 +32,12 @@
       display: flex;
       align-items: center;
       margin-bottom: 15px;
-      
-      p {
+
+      input {
         margin-left: 15px;
+        border: 0;
+        font-size: 16px;
+        width: 100%;
       }
     }
   }
@@ -61,8 +64,7 @@
     }
 
     input {
-      position: absolute;
-      left: -30px;
+      display: none;
     }
 
     label {
