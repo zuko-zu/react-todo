@@ -1,24 +1,35 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
-import AddList from './components/AddList/AddList'
-import List from './components/List/List'
-import Tasks from './components/Tasks/Tasks'
-
-import DB from './assets/db.json'
+import { List, AddList, Tasks } from './components'
 
 function App() {
-  const [lists, setLists] = useState(DB.lists.map(item => {
-    item.color = DB.colors.filter(color => color.id === item.colorId)[0].name
-    return item
-  }))
+
+  // const [lists, setLists] = useState(DB.lists.map(item => {
+  //   item.color = DB.colors.filter(color => color.id === item.colorId)[0].name
+  //   return item
+  // }))
+
+  const [lists, setLists] = useState(null)
+  const [colors, setColors] = useState(null)
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/lists?_expand=color').then(({ data }) => { // Деструктурируем респонс, вытаскивем только нужные данные. Весь респонс не нужен
+      setLists(data)
+    })
+    axios.get('http://localhost:3001/colors').then(({ data }) => {
+      setColors(data)
+      // console.log('dd')
+    })
+  }, []) // Указали пустой массив. Значит функция вызовется только 1 раз как только компонент действительно отрендерится. Почти эквивалентно componentDidMount()
 
   const onAddList = (obj) => {
     const newList = [...lists, obj]
     setLists(newList)
   }
 
-  const onRemove = item => {
-    const newList = lists.filter(list => list.name !== item.name)
+  const onRemove = id => {
+    const newList = lists.filter(list => list.id !== id)
     setLists(newList)
   }
 
@@ -40,18 +51,25 @@ function App() {
             active: true
           }
         ]} />
-        <List 
+        {/* <List 
         items={lists} 
         onRemove={onRemove}
         isRemovable 
-        />
+        /> */}
+        {lists ? (
+          <List
+            items={lists}
+            onRemove={onRemove}
+            isRemovable
+          />
+        ) : (
+          'Загрузка...'
+        )}
         <AddList 
-        colors={DB.colors} 
+        colors={colors} 
         onAdd={onAddList} />
       </div>
-      <div className="todo__tasks">
-        <Tasks />
-      </div>
+      <div className="todo__tasks">{lists && <Tasks list={lists[1]} />}</div>
     </div>
   )
 }
