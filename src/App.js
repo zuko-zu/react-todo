@@ -14,7 +14,6 @@ function App() {
     })
     axios.get('http://localhost:3001/colors').then(({ data }) => {
       setColors(data)
-      // console.log('dd')
     })
   }, []) // Указали пустой массив. Значит функция вызовется только 1 раз как только компонент действительно отрендерится. Почти эквивалентно componentDidMount()
 
@@ -23,8 +22,28 @@ function App() {
     setLists(newList)
   }
 
+  const onAddTask = (listId, taskObj) => {
+    const newList = lists.map(list => {
+      if (list.id === listId) {
+        list.tasks = [...list.tasks, taskObj]
+      }
+      return list
+    })
+    setLists(newList)
+  }
+  
   const onRemove = id => {
     const newList = lists.filter(list => list.id !== id)
+    setLists(newList)
+  }
+
+  const onEditListTitle = (id, title) => {
+    const newList = lists.map(list => {
+      if (list.id === id) {
+        list.name = title
+      }
+      return list
+    })
     setLists(newList)
   }
 
@@ -68,7 +87,15 @@ function App() {
         colors={colors} 
         onAdd={onAddList} />
       </div>
-      <div className="todo__tasks">{lists && activeItem && <Tasks list={activeItem} />}</div>
+      <div 
+        className="todo__tasks">
+          {lists && activeItem && 
+          <Tasks 
+            list={activeItem} 
+            onEditTitle={onEditListTitle}
+            onAddTask={onAddTask}
+          />}
+      </div>
     </div>
   )
 }

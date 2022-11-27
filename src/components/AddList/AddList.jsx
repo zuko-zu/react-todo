@@ -18,7 +18,7 @@ const AddList = ({ colors, onAdd }) => {
     if (Array.isArray(colors)) {
       selectColor(colors[0].id);
     }
-  }, [colors]);
+  }, [colors]); // Вызывается, когда меняется colors
 
   const onClose = () => {
     setVisiblePopup(false)
@@ -43,6 +43,9 @@ const AddList = ({ colors, onAdd }) => {
       const listbj = {...data, color: {name: color}}
       onAdd(listbj)
       onClose()
+    })
+    .catch(() => {
+      alert('Ошибка при добавлении списка')
     })
     .finally(() => {
       setIsLoading(false)
