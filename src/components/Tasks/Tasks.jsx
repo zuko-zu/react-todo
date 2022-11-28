@@ -6,7 +6,7 @@ import './Tasks.scss'
 
 import editSvg from '../../assets/icons/edit.svg'
 
-const Tasks = ({ list, onEditTitle, onAddTask }) => {
+const Tasks = ({ list, onEditTitle, onAddTask, withoutEmpty }) => {
 
   const editTitle = () => {
     const newTitle = window.prompt('Введите новое название списка', list.name)
@@ -34,7 +34,7 @@ const Tasks = ({ list, onEditTitle, onAddTask }) => {
       </h2>
 
       <div className="tasks__items">
-      {!list.tasks.length && <h2>Задачи отсутствуют</h2>}
+      {!withoutEmpty && !list.tasks.length && <h2>Задачи отсутствуют</h2>}
       {
         list.tasks.map(task => 
           <div key={task.id} className="tasks__items-row">
