@@ -46,6 +46,7 @@ const Tasks = ({ list, onEditTitle, onAddTask, onRemoveTask, onEditTask, without
           {...task} /> // Будут переданы все свойства task в качестве пропсов компонента
       ))}
       <AddTaskForm 
+        key={list.id} // Нужен key, чтобы распознавать изменившиеся элементы. Здесь без него, при переходе на другие списки, форма будет сохраняться состояние, в котором находилась до перехода.
         list={list}
         onAddTask={onAddTask}
       />
