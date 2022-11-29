@@ -128,7 +128,7 @@ function App() {
                 fill="#7C7C7C"/>
               </svg>,
               name: 'Все задачи',
-              active: true
+              active: location.pathname === '/'
             }
           ]} 
         />
