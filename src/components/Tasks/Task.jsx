@@ -1,4 +1,4 @@
-function Task({ id, text, list, onRemove}) {
+function Task({ id, text, list, onEdit, onRemove}) {
   return (
     <div key={id} className="tasks__items-row">
       <div className="checkbox">
@@ -24,7 +24,7 @@ function Task({ id, text, list, onRemove}) {
     <p>{text}</p>
     
     <div className="tasks__items-row-actions">
-      <div>
+      <div onClick={() => onEdit(list.id, { id, text })}>
         <svg
           width="15"
           height="15"

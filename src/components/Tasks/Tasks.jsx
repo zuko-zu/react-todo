@@ -8,7 +8,7 @@ import './Tasks.scss'
 
 import editSvg from '../../assets/icons/edit.svg'
 
-const Tasks = ({ list, onEditTitle, onAddTask, onRemoveTask, withoutEmpty }) => {
+const Tasks = ({ list, onEditTitle, onAddTask, onRemoveTask, onEditTask, withoutEmpty }) => {
 
   const editTitle = () => {
     const newTitle = window.prompt('Введите новое название списка', list.name)
@@ -42,6 +42,7 @@ const Tasks = ({ list, onEditTitle, onAddTask, onRemoveTask, withoutEmpty }) => 
           key={task.id} 
           list={list}
           onRemove={onRemoveTask}
+          onEdit={onEditTask}
           {...task} /> // Будут переданы все свойства task в качестве пропсов компонента
       ))}
       <AddTaskForm 

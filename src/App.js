@@ -67,6 +67,32 @@ function App() {
         })
     }
   }
+
+  const onEditTask = (listId, taskObj) => {
+    const newTaskText = window.prompt('Текст задачи', taskObj.text)
+
+    if (!newTaskText) return
+
+    const newList = lists.map(list => {
+      if (list.id === listId) {
+        list.tasks.map(task => {
+          if (task.id === taskObj.id) {
+            task.text = newTaskText
+          }
+          return task
+        })
+      }
+      return list
+    })
+    setLists(newList)
+    axios
+        .patch('http://localhost:3001/tasks/' + taskObj.id, {
+          text: newTaskText
+        })
+        .catch(() => {
+          alert('Не удалось изменить задачу')
+        })
+  }
   
   const onRemove = id => {
     const newList = lists.filter(list => list.id !== id)
@@ -134,6 +160,7 @@ function App() {
                   onEditTitle={onEditListTitle}
                   onAddTask={onAddTask}
                   onRemoveTask={onRemoveTask}
+                  onEditTask={onEditTask}
                   withoutEmpty
                 />
               ))
@@ -146,6 +173,7 @@ function App() {
                   onEditTitle={onEditListTitle}
                   onAddTask={onAddTask}
                   onRemoveTask={onRemoveTask}
+                  onEditTask={onEditTask}
                 />}
               />
             <Route path="/list" element={<h2>efk</h2>}></Route>
