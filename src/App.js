@@ -93,6 +93,28 @@ function App() {
           alert('Не удалось изменить задачу')
         })
   }
+
+  const onCompleteTask = (listId, taskId, completed) => {
+    const newList = lists.map(list => {
+      if (list.id === listId) {
+        list.tasks.map(task => {
+          if (task.id === taskId) {
+            task.completed = completed
+          }
+          return task
+        })
+      }
+      return list
+    })
+    setLists(newList)
+    axios
+        .patch('http://localhost:3001/tasks/' + taskId, {
+          completed: completed
+        })
+        .catch(() => {
+          alert('Не удалось изменить задачу')
+        })
+  }
   
   const onRemove = id => {
     const newList = lists.filter(list => list.id !== id)
@@ -174,6 +196,7 @@ function App() {
                   onAddTask={onAddTask}
                   onRemoveTask={onRemoveTask}
                   onEditTask={onEditTask}
+                  onCompleteTask={onCompleteTask}
                 />}
               />
             <Route path="/list" element={<h2>efk</h2>}></Route>

@@ -1,8 +1,17 @@
-function Task({ id, text, list, onEdit, onRemove}) {
+function Task({ id, text, completed, list, onEdit, onRemove, onComplete}) {
+  const onChangeCheckbox = e => {
+    onComplete(list.id, id, e.target.checked)
+  }
+
   return (
     <div key={id} className="tasks__items-row">
       <div className="checkbox">
-        <input type="checkbox" id={`task-${id}`} />
+        <input 
+          type="checkbox" 
+          id={`task-${id}`} 
+          onChange={onChangeCheckbox}
+          checked={completed}
+        />
         <label htmlFor={`task-${id}`}>
           <svg 
             width="11" 
