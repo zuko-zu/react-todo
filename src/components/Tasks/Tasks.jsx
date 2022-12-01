@@ -26,7 +26,9 @@ const Tasks = ({ list, onEditTitle, onAddTask, onRemoveTask, onEditTask, without
 
   return (
     <div className="tasks">
-      <h2 className="tasks__title">
+      <h2 
+        className="tasks__title"
+        style={{color: list.color.hex}}>
         {list.name}
         <img 
           src={editSvg} 
@@ -36,8 +38,8 @@ const Tasks = ({ list, onEditTitle, onAddTask, onRemoveTask, onEditTask, without
       </h2>
 
       <div className="tasks__items">
-      {!withoutEmpty && !list.tasks.length && <h2>Задачи отсутствуют</h2>}
-      {list.tasks.map(task => (
+      { list.task && !withoutEmpty && !list.tasks.length && <h2>Задачи отсутствуют</h2>}
+      {list.tasks && list.tasks.map(task => (
         <Task 
           key={task.id} 
           list={list}
